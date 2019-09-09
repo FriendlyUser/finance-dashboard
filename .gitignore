@@ -1,0 +1,8 @@
+env
+*.tex
+.vscode
+__pycache__
+*.pyc
+api/__pycache__
+docs
+debug.log

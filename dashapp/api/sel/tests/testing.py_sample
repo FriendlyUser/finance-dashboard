@@ -1,0 +1,16 @@
+td_fund_name = 'TD Global Entertainment and Communications Fund (US$) - I Fund Code Multiple TDB223'
+first, *middle, last = td_fund_name.split()
+print(last)
+
+print(first)
+print(first+str(middle[:len(middle)-3]))
+
+def bool_provider(revenue, year):
+    return revenue<year_revenue_dict[year]
+
+td_fund_name = 'TD Global Entertainment and Communications Fund (US$) - I Fund Code Multiple TDB223'
+list_test = td_fund_name.split()
+print(list_test)
+
+print(list_test[:-4])
+print(list_test[-4:])

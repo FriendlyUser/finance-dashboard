@@ -1,0 +1,31 @@
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+import time
+from bs4 import BeautifulSoup, Comment, NavigableString
+import pandas as pd
+import pytest
+import sys
+sys.path.append("..")
+from banks.fetch import get_mf_data
+from banks.util.gen_webdriver import gen_test_driver
+def test_get_td_bank():
+    selenium = gen_test_driver()
+    selenium.get("https://www.td.com/ca/en/asset-management/funds/solutions/mutual-funds/")
+    try:
+        # Ensure that the format of the web page hasn't changed
+        test_div = WebDriverWait(selenium, 15).until(
+            EC.presence_of_element_located((By.ID, "tabsCarousel0_tab0"))
+        )
+    except TimeoutException as ex:
+        print("Couldn't find tabsCarousel0_tab0 for mutual fund data")
+        assert False
+    selenium.close()
+
+def test_parsing_soup():
+    selenium = gen_test_driver()
+    td_bank_df = get_mf_data(selenium)
+    assert len(td_bank_df.columns) == 7
+    assert len(td_bank_df.index) >= 150
+    selenium.close()

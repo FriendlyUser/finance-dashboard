@@ -1,0 +1,59 @@
+stats_can_url: https://www150.statcan.gc.ca/n1/dai-quo/ssi/homepage/ind-econ.json
+exchange_api: https://api.exchangeratesapi.io
+# deployed puppeter calls to check mutual fund data from rbc and td
+# mainly used because 512MB is not enough for heroku to scrap the data
+# and run dash
+gcs_api: <GCP URL ROOT FOR DEPLOYED GCS functions>
+stocks:
+    GOOG:
+        name: GOOG
+        buy_price: 1204.93
+        num_units: 69
+    AMZN:
+        name: AMZN
+        buy_price: 69
+        num_units: 1833.51
+# Perhaps rename to holdings.
+# Consider adding plot colors and line symbols to better distinguish the plots, plot dict perhaps
+mf:
+    td:
+        TDB970:
+            name: TD Balanced Growth Fund (Would never buy)
+            num_units: 100
+            buy_price: 2900
+        TDB160:
+            name: TD Balanced Income Fund - I (MER TOO HIGH)
+            num_units: 2.432
+            buy_price: 10
+        TDB965:
+            name: TD Balanced Index Fund - I (maybe buy)
+            num_units: 368.189
+            buy_price: 20.3700
+            up_2_date: true
+    rbc:
+        RBF558:
+            name: RBC U.S. INDEX CURRENCY NEUTRAL FUND
+            num_units: 1.00
+            buy_price: 2
+        RBF556:
+            name: RBC Canadian Index Fund A
+            num_units: 212
+            buy_price: 302
+
+# including list of mutual fund codes for fetching data
+# this is used to get a list of fund that may be of interest
+banks:
+    td:
+        codes:
+            - TDB965
+            - TDB970
+            - TDB160
+            - TDB965
+            - TDB981
+            - TDB217
+            - TDB661
+    rbc:
+        codes:
+            - RBF558
+            - RBF557
+            - RBF559

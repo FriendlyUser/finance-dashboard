@@ -1,0 +1,17 @@
+import re
+
+def test_regex():
+
+    text = 'gfgfdAAA1234ZZZuijjk'
+    try:
+        found = re.search('AAA(.+?)ZZZ', text).group(1)
+    except AttributeError:
+        # AAA, ZZZ not found in the original string
+        found = '' # apply your error handling
+    assert found == '1234'
+
+def test_regex_td():
+    td_fund_name = 'TD Global Entertainment and Communications Fund (US$) - I Fund Code Multiple TDB223'
+    first, *middle, last = td_fund_name.split()
+    print(last)
+    assert last == "TDB223"

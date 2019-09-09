@@ -1,0 +1,54 @@
+
+
+
+image: joyzoursky/python-chromedriver:3.6-xvfb-selenium
+
+stages:
+  - test
+  - deploy
+
+scrappingtest: 
+  variables:
+    DASH_SUPPRESS: "True"
+  stage: test
+  before_script:
+    - pip3 install -r requirementsFull.txt
+    - pip3 install pdoc3
+  script: 
+    # Calling all modules
+    # - python3 -m unittest api.sel.tests.td_mf_test reference.garbo api.sel.tests.rbc_mf_test api.sel.tests.test_gcs_scrap api.sel.tests.yahoo_test
+    - python3 -m dashapp.api.run_tests
+    - chmod +x create_doc.sh && ./create_doc.sh
+  artifacts:
+    paths:
+      - "*.html"
+      - "*.png"
+      - "docs"
+      - "*.tex"
+      - "*.csv"
+    expire_in: 7 days
+
+staging:
+  dependencies:
+    - selenium_job
+  type: deploy
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=dli-port --api-key=$HEROKU_API_KEY --no-cleanup
+  only:
+    - master
+
+# Ensure that gitlab test cases don't fail
+cloud-apis:
+  stage: test
+  # use special keywords
+  before_script:
+    - pip3 install -r requirementsFull.txt
+    - pip3 install pdoc3
+  script: 
+    - python3 -m unittest dashapp.api.sel.tests.cloud_apis
+  only:
+    - triggers
+    - schedules
