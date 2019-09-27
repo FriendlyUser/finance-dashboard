@@ -19,4 +19,4 @@ pip install
 For local usage, use python run.py
 
 
-![./screenCap.png]
+![Screenshot](screenCap.png)
