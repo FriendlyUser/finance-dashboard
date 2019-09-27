@@ -17,3 +17,6 @@ pip install
 ```
 
 For local usage, use python run.py
+
+
+![./screenCap.png]
