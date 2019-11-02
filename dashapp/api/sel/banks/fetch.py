@@ -67,8 +67,11 @@ def download_rbc_mf_quotes(browser):
         # These general exceptions are probably selenium ones, include timeout
         print(ex)
         assert False
-    
-    elem = browser.find_element_by_xpath('//*[@id="app"]/main/div[3]/div/div[3]/div[3]/span[1]/a')
+    # Before 11/2/2019
+    # xpath = '//*[@id="app"]/main/div[3]/div/div[3]/div[3]/span[1]/a'
+    # After 11/2/2019
+    xpath = '//*[@id="app"]/main/div[3]/div/div[3]/div[4]/span[1]/a'
+    elem = browser.find_element_by_xpath(xpath)
     elem.click()
     # Should be saved as Prices.csv
 

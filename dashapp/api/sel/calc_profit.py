@@ -54,8 +54,13 @@ def calc_profit(rbc_df, td_df):
     for mf_sum in td_keys:
         mf_data = config["mf"]["td"][mf_sum]
         mf_row = td_df.loc[td_df['Fund Code'] == mf_sum]
+        if mf_row.empty:
+            print(mf_row)
+            print('Dataframe row is empty', mf_data['name'])
+            continue
         curr_price = mf_row.iloc[0][1]
-        curr_profit = (curr_price - mf_data["buy_price"]) * mf_data["num_units"]
+        print(curr_price)
+        curr_profit = (float(curr_price) - float(mf_data["buy_price"])) * float(mf_data["num_units"])
         mf_df_temp = pd.DataFrame([[mf_sum, mf_data["name"], 
             mf_data["buy_price"], mf_data["num_units"],
             curr_price,

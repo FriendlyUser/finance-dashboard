@@ -39,41 +39,6 @@ class TestRegexMethods(unittest.TestCase):
         first, *middle, last = td_fund_name.split()
         # print(last)
         self.assertEqual(last, "TDB223")
-
-class TestTemplate(unittest.TestCase):
-    """Include test cases on a given url"""
-
-    def setUp(self):
-        """Start web driver"""
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('--headless')
-        chrome_options.add_argument('--disable-gpu')
-        self.driver = webdriver.Chrome(options=chrome_options)
-        self.driver.implicitly_wait(1)
-
-    def tearDown(self):
-        """Stop web driver"""
-        self.driver.quit()
-
-    def test_case_1(self):
-        """Find and click top-right button"""
-        try:
-            self.driver.get('https://www.oursky.com/')
-            el = self.driver.find_element_by_class_name('btn-header')
-            el.click()
-        except NoSuchElementException as ex:
-            self.fail(ex.msg)
-
-    def test_case_2(self):
-        """Find and click Learn more button"""
-        try:
-            self.driver.get('https://www.oursky.com/')
-            el = self.driver.find_element_by_xpath(".//*[@id='tag-line-wrap']/span/a")
-            el.click()
-        except NoSuchElementException as ex:
-            self.fail(ex.msg)
-
             
 class TestTDScrap(unittest.TestCase):
     """Include test cases on a given url"""
@@ -110,8 +75,9 @@ class TestTDScrap(unittest.TestCase):
         if td_bank_df.empty == True:
             print("Empty Detected")
         else:
+            # Should be at least 147
             self.assertTrue(len(td_bank_df.columns) >= 1)
-            self.assertTrue(len(td_bank_df.index) >= 150)
+            self.assertTrue(len(td_bank_df.index) >= 145)
 
 if __name__ == '__main__':
     if sys.platform in [None,'','linux']:

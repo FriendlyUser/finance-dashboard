@@ -19,7 +19,7 @@ mf:
     td:
         TDB970:
             name: TD Balanced Growth Fund (Would never buy)
-            num_units: 100
+            num_units: 0
             buy_price: 2900
         TDB160:
             name: TD Balanced Income Fund - I (MER TOO HIGH)
